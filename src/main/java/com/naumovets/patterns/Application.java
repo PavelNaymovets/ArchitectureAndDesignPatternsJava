@@ -2,6 +2,8 @@ package com.naumovets.patterns;
 
 import com.naumovets.patterns.Builder.OrderDto;
 import com.naumovets.patterns.Builder.OrderItemDto;
+import com.naumovets.patterns.Facade.validator.OrderValidator;
+import com.naumovets.patterns.Facade.validator.OrderValidatorImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,6 +13,10 @@ import static com.naumovets.patterns.Builder.OrderDto.builder;
 
 public class Application {
     public static void main(String[] args) {
+        //=====================================================
+        // Pattern Builder - порождающий паттерн
+        //=====================================================
+
         /*
          Использование порождающего паттерна builder на примере объекта для передачи
          данных заказа из домашнего проекта интернет-магазина
@@ -40,5 +46,19 @@ public class Application {
 
         //Убедимся, что объект создан корректно
         System.out.println(orderDto.toString());
+
+        //=====================================================
+        // Pattern Facade - структурный паттерн
+        //=====================================================
+
+        /*
+         Facade - паттерн задача которого предоставить простой интерфейс и скрыть сложную реализацию от пользователя.
+         Реализуется с помощью интерфейса и класса реализующего этот интерфейс. В проекте интернет-магазина был применен
+         паатер facade для валидации данных из формы для заказа. Данные содержат информацию о пользователе и заказе, которую
+         нужно проверить на корректность написания (имя, телефон, адрес). При этом использование facade позволяет применить
+         динамическое связывание ссылки с кодом и подставить нужную реализацию методов во время компиляции.
+        */
+        OrderValidator orderValidator = new OrderValidatorImpl();
+        orderValidator.validate("Ivan", "8(911)295-96-84", "Россия,г.Москва,ул.Нахимова,дом 2,кв.18");
     }
 }
