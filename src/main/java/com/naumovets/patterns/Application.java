@@ -4,6 +4,8 @@ import com.naumovets.patterns.Builder.OrderDto;
 import com.naumovets.patterns.Builder.OrderItemDto;
 import com.naumovets.patterns.Facade.validator.OrderValidator;
 import com.naumovets.patterns.Facade.validator.OrderValidatorImpl;
+import com.naumovets.patterns.Iterator.Iterator;
+import com.naumovets.patterns.Iterator.ListIterator;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -60,5 +62,23 @@ public class Application {
         */
         OrderValidator orderValidator = new OrderValidatorImpl();
         orderValidator.validate("Ivan", "8(911)295-96-84", "Россия,г.Москва,ул.Нахимова,дом 2,кв.18");
+
+        //=====================================================
+        // Pattern Iterator - поведенческий паттерн
+        //=====================================================
+
+        /*
+         Iterator - паттерн задача которого предоставьте интерфейс для перебора элементов. В проекте интернет-магазина
+         применял для перебора элементов коллекции ArrayList<>() в виде for each метода, который является синтаксическим
+         сахаром и по сути реализован через Iterator.
+        */
+
+        List<String> list = new ArrayList<>(List.of("word", "inside", "list"));
+        Iterator<String> iterator = new ListIterator<>(list);
+
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            System.out.println(element);
+        }
     }
 }
